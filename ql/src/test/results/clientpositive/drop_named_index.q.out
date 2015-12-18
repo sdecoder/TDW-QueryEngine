@@ -1,0 +1,15 @@
+query: explain alter table altertable drop index idx_ab
+ABSTRACT SYNTAX TREE:
+  (TOK_ALTERTABLE_DROPINDEX altertable (TOK_INDEXNAME idx_ab))
+
+STAGE DEPENDENCIES:
+  Stage-0 is a root stage
+
+STAGE PLANS:
+  Stage: Stage-0
+      Alter Table Operator:
+        Alter Table
+          type: unknown
+          old name: altertable
+
+

@@ -1,0 +1,1 @@
+1.在测试的时候，要保证data/scripts，ql/src/test/scripts下的脚本有执行权限

@@ -1,0 +1,6 @@
+query: SELECT 3 / 2 FROM SRC LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/1420604591/10000
+1.5
+query: SELECT 3 DIV 2 FROM SRC LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/1000402872/10000
+1

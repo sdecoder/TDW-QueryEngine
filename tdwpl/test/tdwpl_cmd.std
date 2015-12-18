@@ -1,0 +1,21 @@
+Python version is OK.
+Entering test shell mode now ...
+Username: Password: Welcome to TDW PL Shell, for help please input ? or help
+Disable color mode.
+root
+Connect to server '172.25.38.251:10000' success.
+Your have connected to a server.
+New Session 32184601496106524 157878241
+Your have attached to a session.
+Use 'status' to get the client state.
+Drop Session 32184601496106524 ok
+You have not attached to any session.
+Use 'status' to get the client state.
+Use 'new' to new or 'attach' to attach a session.
+Require Session macan failed
+Require Session macan failed
+User: 'root'
+Database name 'default_db'
+Connected to server '172.25.38.251:10000'
+Not attached to any session.
+We have disconnected from the server '172.25.38.251'

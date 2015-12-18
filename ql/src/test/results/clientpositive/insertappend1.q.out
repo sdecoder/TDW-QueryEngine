@@ -1,0 +1,117 @@
+query: DROP TABLE dest1
+query: CREATE TABLE dest1(key INT, value STRING) STORED AS TEXTFILE
+query: EXPLAIN
+FROM src
+INSERT TABLE dest1 SELECT src.key, src.value WHERE src.key < 100
+ABSTRACT SYNTAX TREE:
+  (TOK_QUERY (TOK_FROM (TOK_TABREF (TOK_TAB src))) (TOK_INSERT (TOK_APPENDDESTINATION (TOK_TAB dest1)) (TOK_SELECT (TOK_SELEXPR (. (TOK_TABLE_OR_COL src) key)) (TOK_SELEXPR (. (TOK_TABLE_OR_COL src) value))) (TOK_WHERE (< (. (TOK_TABLE_OR_COL src) key) 100))))
+
+STAGE DEPENDENCIES:
+  Stage-1 is a root stage
+  Stage-4 depends on stages: Stage-1
+  Stage-0 depends on stages: Stage-4
+
+STAGE PLANS:
+  Stage: Stage-1
+    Map Reduce
+      Alias -> Map Operator Tree:
+        default_db/src 
+          TableScan
+            alias: default_db/src
+            Filter Operator
+              predicate:
+                  expr: (UDFToDouble(key) < UDFToDouble(100))
+                  type: boolean
+              Filter Operator
+                predicate:
+                    expr: (UDFToDouble(key) < UDFToDouble(100))
+                    type: boolean
+                Select Operator
+                  expressions:
+                        expr: key
+                        type: string
+                        expr: value
+                        type: string
+                  outputColumnNames: _col0, _col1
+                  Select Operator
+                    expressions:
+                          expr: UDFToInteger(_col0)
+                          type: int
+                          expr: _col1
+                          type: string
+                    outputColumnNames: _col0, _col1
+                    File Output Operator
+                      compressed: false
+                      GlobalTableId: 1
+                      table:
+                          input format: org.apache.hadoop.mapred.TextInputFormat
+                          output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+                          serde: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe
+                          name: dest1
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/test/data/warehouse/default_db/src 
+
+  Stage: Stage-4
+    Conditional Operator
+      list of dependent Tasks:
+          Move Operator
+            files:
+                hdfs directory: true
+                destination: file:/data/allison/merged/build/ql/tmp/1595676930/10000
+          Map Reduce
+            Alias -> Map Operator Tree:
+              file:/data/allison/merged/build/ql/tmp/446771084/10002 
+                  Reduce Output Operator
+                    sort order: 
+                    Map-reduce partition columns:
+                          expr: rand()
+                          type: double
+                    tag: -1
+                    value expressions:
+                          expr: key
+                          type: int
+                          expr: value
+                          type: string
+            Path -> Alias:
+              file:/data/allison/merged/build/ql/tmp/446771084/10002 
+            Reduce Operator Tree:
+              Extract
+                File Output Operator
+                  compressed: false
+                  GlobalTableId: 0
+                  table:
+                      input format: org.apache.hadoop.mapred.TextInputFormat
+                      output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+                      serde: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe
+                      name: dest1
+
+  Stage: Stage-0
+    Move Operator
+      tables:
+          replace: false
+          table:
+              input format: org.apache.hadoop.mapred.TextInputFormat
+              output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+              serde: org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe
+              name: dest1
+
+
+query: FROM src
+INSERT TABLE dest1 SELECT src.key, src.value WHERE src.key < 100
+Output: default_db/dest1
+query: SELECT count(1) FROM dest1
+Output: file:/data/allison/merged/build/ql/tmp/1138719698/10000
+84
+query: FROM src
+INSERT TABLE dest1 SELECT src.key, src.value WHERE src.key < 100
+Output: default_db/dest1
+query: SELECT count(1) FROM dest1
+Output: file:/data/allison/merged/build/ql/tmp/1467704519/10000
+168
+query: FROM src
+INSERT OVERWRITE TABLE dest1 SELECT src.key, src.value WHERE src.key < 100
+Output: default_db/dest1
+query: SELECT count(1) FROM dest1
+Output: file:/data/allison/merged/build/ql/tmp/214771668/10000
+84
+query: DROP TABLE dest1

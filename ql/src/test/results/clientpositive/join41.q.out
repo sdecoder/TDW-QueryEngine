@@ -1,0 +1,107 @@
+query: EXPLAIN
+SELECT /*+ MAPJOIN(a) */ count(1) FROM src a  JOIN src b on a.key = b.key
+ABSTRACT SYNTAX TREE:
+  (TOK_QUERY (TOK_FROM (TOK_JOIN (TOK_TABREF (TOK_TAB src) a) (TOK_TABREF (TOK_TAB src) b) (= (. (TOK_TABLE_OR_COL a) key) (. (TOK_TABLE_OR_COL b) key)))) (TOK_INSERT (TOK_DESTINATION (TOK_DIR TOK_TMP_FILE)) (TOK_SELECT (TOK_HINTLIST (TOK_HINT TOK_MAPJOIN (TOK_HINTARGLIST (TOK_TABLE_OR_COL a)))) (TOK_SELEXPR (TOK_FUNCTION count 1)))))
+
+STAGE DEPENDENCIES:
+  Stage-1 is a root stage
+  Stage-2 depends on stages: Stage-1
+  Stage-0 is a root stage
+
+STAGE PLANS:
+  Stage: Stage-1
+    Map Reduce
+      Alias -> Map Operator Tree:
+        default_db/src#b 
+          TableScan
+            alias: default_db/src#b
+            Common Join Operator
+              condition map:
+                   Inner Join 0 to 1
+              condition expressions:
+                0 
+                1 
+              keys:
+                0 
+                1 
+              Position of Big Table: 1
+              File Output Operator
+                compressed: false
+                GlobalTableId: 0
+                table:
+                    input format: org.apache.hadoop.mapred.SequenceFileInputFormat
+                    output format: org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat
+      Local Work:
+        Map Reduce Local Work
+          Alias -> Map Local Tables:
+            default_db/src#a 
+              Fetch Operator
+                limit: -1
+          Alias -> Map Local Operator Tree:
+            default_db/src#a 
+              TableScan
+                alias: default_db/src#a
+                Common Join Operator
+                  condition map:
+                       Inner Join 0 to 1
+                  condition expressions:
+                    0 
+                    1 
+                  keys:
+                    0 
+                    1 
+                  Position of Big Table: 1
+                  File Output Operator
+                    compressed: false
+                    GlobalTableId: 0
+                    table:
+                        input format: org.apache.hadoop.mapred.SequenceFileInputFormat
+                        output format: org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/test/data/warehouse/default_db/src 
+
+  Stage: Stage-2
+    Map Reduce
+      Alias -> Map Operator Tree:
+        file:/data/allison/merged/build/ql/tmp/1953976161/10002 
+          Select Operator
+            Select Operator
+              Group By Operator
+                aggregations:
+                      expr: count(1)
+                mode: hash
+                outputColumnNames: _col0
+                Reduce Output Operator
+                  sort order: 
+                  tag: -1
+                  value expressions:
+                        expr: _col0
+                        type: bigint
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/tmp/1953976161/10002 
+      Reduce Operator Tree:
+        Group By Operator
+          aggregations:
+                expr: count(VALUE._col0)
+          mode: mergepartial
+          outputColumnNames: _col0
+          Select Operator
+            expressions:
+                  expr: _col0
+                  type: bigint
+            outputColumnNames: _col0
+            File Output Operator
+              compressed: false
+              GlobalTableId: 0
+              table:
+                  input format: org.apache.hadoop.mapred.TextInputFormat
+                  output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+
+  Stage: Stage-0
+    Fetch Operator
+      limit: -1
+
+
+query: SELECT /*+ MAPJOIN(a) */ count(1) FROM src a  JOIN src b on a.key = b.key
+Output: file:/data/allison/merged/build/ql/tmp/1925459835/10000
+1028

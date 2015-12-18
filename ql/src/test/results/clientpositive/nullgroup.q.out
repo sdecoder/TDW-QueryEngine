@@ -1,0 +1,275 @@
+query: explain
+select count(1) from src x where x.key > 9999
+ABSTRACT SYNTAX TREE:
+  (TOK_QUERY (TOK_FROM (TOK_TABREF (TOK_TAB src) x)) (TOK_INSERT (TOK_DESTINATION (TOK_DIR TOK_TMP_FILE)) (TOK_SELECT (TOK_SELEXPR (TOK_FUNCTION count 1))) (TOK_WHERE (> (. (TOK_TABLE_OR_COL x) key) 9999))))
+
+STAGE DEPENDENCIES:
+  Stage-1 is a root stage
+  Stage-0 is a root stage
+
+STAGE PLANS:
+  Stage: Stage-1
+    Map Reduce
+      Alias -> Map Operator Tree:
+        default_db/src#x 
+          TableScan
+            alias: default_db/src#x
+            Filter Operator
+              predicate:
+                  expr: (UDFToDouble(key) > UDFToDouble(9999))
+                  type: boolean
+              Filter Operator
+                predicate:
+                    expr: (UDFToDouble(key) > UDFToDouble(9999))
+                    type: boolean
+                Select Operator
+                  Group By Operator
+                    aggregations:
+                          expr: count(1)
+                    mode: hash
+                    outputColumnNames: _col0
+                    Reduce Output Operator
+                      sort order: 
+                      tag: -1
+                      value expressions:
+                            expr: _col0
+                            type: bigint
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/test/data/warehouse/default_db/src 
+      Reduce Operator Tree:
+        Group By Operator
+          aggregations:
+                expr: count(VALUE._col0)
+          mode: final
+          outputColumnNames: _col0
+          Select Operator
+            expressions:
+                  expr: _col0
+                  type: bigint
+            outputColumnNames: _col0
+            File Output Operator
+              compressed: false
+              GlobalTableId: 0
+              table:
+                  input format: org.apache.hadoop.mapred.TextInputFormat
+                  output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+
+  Stage: Stage-0
+    Fetch Operator
+      limit: -1
+
+
+query: select count(1) from src x where x.key > 9999
+Output: file:/data/allison/merged/build/ql/tmp/13953633/10000
+0
+query: explain
+select count(1) from src x where x.key > 9999
+ABSTRACT SYNTAX TREE:
+  (TOK_QUERY (TOK_FROM (TOK_TABREF (TOK_TAB src) x)) (TOK_INSERT (TOK_DESTINATION (TOK_DIR TOK_TMP_FILE)) (TOK_SELECT (TOK_SELEXPR (TOK_FUNCTION count 1))) (TOK_WHERE (> (. (TOK_TABLE_OR_COL x) key) 9999))))
+
+STAGE DEPENDENCIES:
+  Stage-1 is a root stage
+  Stage-0 is a root stage
+
+STAGE PLANS:
+  Stage: Stage-1
+    Map Reduce
+      Alias -> Map Operator Tree:
+        default_db/src#x 
+          TableScan
+            alias: default_db/src#x
+            Filter Operator
+              predicate:
+                  expr: (UDFToDouble(key) > UDFToDouble(9999))
+                  type: boolean
+              Filter Operator
+                predicate:
+                    expr: (UDFToDouble(key) > UDFToDouble(9999))
+                    type: boolean
+                Select Operator
+                  Group By Operator
+                    aggregations:
+                          expr: count(1)
+                    mode: hash
+                    outputColumnNames: _col0
+                    Reduce Output Operator
+                      sort order: 
+                      tag: -1
+                      value expressions:
+                            expr: _col0
+                            type: bigint
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/test/data/warehouse/default_db/src 
+      Reduce Operator Tree:
+        Group By Operator
+          aggregations:
+                expr: count(VALUE._col0)
+          mode: mergepartial
+          outputColumnNames: _col0
+          Select Operator
+            expressions:
+                  expr: _col0
+                  type: bigint
+            outputColumnNames: _col0
+            File Output Operator
+              compressed: false
+              GlobalTableId: 0
+              table:
+                  input format: org.apache.hadoop.mapred.TextInputFormat
+                  output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+
+  Stage: Stage-0
+    Fetch Operator
+      limit: -1
+
+
+query: select count(1) from src x where x.key > 9999
+Output: file:/data/allison/merged/build/ql/tmp/1779266931/10000
+0
+query: explain
+select count(1) from src x where x.key > 9999
+ABSTRACT SYNTAX TREE:
+  (TOK_QUERY (TOK_FROM (TOK_TABREF (TOK_TAB src) x)) (TOK_INSERT (TOK_DESTINATION (TOK_DIR TOK_TMP_FILE)) (TOK_SELECT (TOK_SELEXPR (TOK_FUNCTION count 1))) (TOK_WHERE (> (. (TOK_TABLE_OR_COL x) key) 9999))))
+
+STAGE DEPENDENCIES:
+  Stage-1 is a root stage
+  Stage-2 depends on stages: Stage-1
+  Stage-0 is a root stage
+
+STAGE PLANS:
+  Stage: Stage-1
+    Map Reduce
+      Alias -> Map Operator Tree:
+        default_db/src#x 
+          TableScan
+            alias: default_db/src#x
+            Filter Operator
+              predicate:
+                  expr: (UDFToDouble(key) > UDFToDouble(9999))
+                  type: boolean
+              Filter Operator
+                predicate:
+                    expr: (UDFToDouble(key) > UDFToDouble(9999))
+                    type: boolean
+                Select Operator
+                  Reduce Output Operator
+                    sort order: 
+                    Map-reduce partition columns:
+                          expr: rand()
+                          type: double
+                    tag: -1
+                    value expressions:
+                          expr: 1
+                          type: int
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/test/data/warehouse/default_db/src 
+      Reduce Operator Tree:
+        Group By Operator
+          aggregations:
+                expr: count(VALUE._col0)
+          mode: partial1
+          outputColumnNames: _col0
+          File Output Operator
+            compressed: false
+            GlobalTableId: 0
+            table:
+                input format: org.apache.hadoop.mapred.SequenceFileInputFormat
+                output format: org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat
+
+  Stage: Stage-2
+    Map Reduce
+      Alias -> Map Operator Tree:
+        file:/data/allison/merged/build/ql/tmp/700245256/10002 
+            Reduce Output Operator
+              sort order: 
+              tag: -1
+              value expressions:
+                    expr: _col0
+                    type: bigint
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/tmp/700245256/10002 
+      Reduce Operator Tree:
+        Group By Operator
+          aggregations:
+                expr: count(VALUE._col0)
+          mode: final
+          outputColumnNames: _col0
+          Select Operator
+            expressions:
+                  expr: _col0
+                  type: bigint
+            outputColumnNames: _col0
+            File Output Operator
+              compressed: false
+              GlobalTableId: 0
+              table:
+                  input format: org.apache.hadoop.mapred.TextInputFormat
+                  output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+
+  Stage: Stage-0
+    Fetch Operator
+      limit: -1
+
+
+query: select count(1) from src x where x.key > 9999
+Output: file:/data/allison/merged/build/ql/tmp/825198683/10000
+0
+query: explain
+select count(1) from src x where x.key > 9999
+ABSTRACT SYNTAX TREE:
+  (TOK_QUERY (TOK_FROM (TOK_TABREF (TOK_TAB src) x)) (TOK_INSERT (TOK_DESTINATION (TOK_DIR TOK_TMP_FILE)) (TOK_SELECT (TOK_SELEXPR (TOK_FUNCTION count 1))) (TOK_WHERE (> (. (TOK_TABLE_OR_COL x) key) 9999))))
+
+STAGE DEPENDENCIES:
+  Stage-1 is a root stage
+  Stage-0 is a root stage
+
+STAGE PLANS:
+  Stage: Stage-1
+    Map Reduce
+      Alias -> Map Operator Tree:
+        default_db/src#x 
+          TableScan
+            alias: default_db/src#x
+            Filter Operator
+              predicate:
+                  expr: (UDFToDouble(key) > UDFToDouble(9999))
+                  type: boolean
+              Filter Operator
+                predicate:
+                    expr: (UDFToDouble(key) > UDFToDouble(9999))
+                    type: boolean
+                Select Operator
+                  Reduce Output Operator
+                    sort order: 
+                    tag: -1
+                    value expressions:
+                          expr: 1
+                          type: int
+      Path -> Alias:
+        file:/data/allison/merged/build/ql/test/data/warehouse/default_db/src 
+      Reduce Operator Tree:
+        Group By Operator
+          aggregations:
+                expr: count(VALUE._col0)
+          mode: complete
+          outputColumnNames: _col0
+          Select Operator
+            expressions:
+                  expr: _col0
+                  type: bigint
+            outputColumnNames: _col0
+            File Output Operator
+              compressed: false
+              GlobalTableId: 0
+              table:
+                  input format: org.apache.hadoop.mapred.TextInputFormat
+                  output format: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+
+  Stage: Stage-0
+    Fetch Operator
+      limit: -1
+
+
+query: select count(1) from src x where x.key > 9999
+Output: file:/data/allison/merged/build/ql/tmp/392248947/10000
+0

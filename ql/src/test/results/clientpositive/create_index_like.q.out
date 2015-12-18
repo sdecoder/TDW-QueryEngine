@@ -1,0 +1,17 @@
+query: explain create table likeindex like  nameindex
+ABSTRACT SYNTAX TREE:
+  (TOK_CREATETABLE likeindex (TOK_LIKETABLE nameindex))
+
+STAGE DEPENDENCIES:
+  Stage-0 is a root stage
+
+STAGE PLANS:
+  Stage: Stage-0
+      Create Table Operator:
+        Create Table
+          if not exists: false
+          like: nameindex
+          name: likeindex
+          isExternal: false
+
+

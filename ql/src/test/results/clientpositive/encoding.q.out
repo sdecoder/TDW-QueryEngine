@@ -1,0 +1,9 @@
+query: DROP TABLE testtbl
+query: CREATE TABLE testtbl(KEY INT, VALUE STRING) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' WITH SERDEPROPERTIES("charset"="gbk")
+query: LOAD DATA LOCAL INPATH '../data/files/kv.txt' INTO TABLE testtbl
+query: SELECT * FROM testtbl
+Input: default_db/testtbl
+Output: file:/data/taojiang/qe_expansion/build/ql/tmp/1561047729/10000
+238	val_238呵呵
+86	val_86哈哈
+311	val_311嘿嘿

@@ -1,0 +1,7 @@
+query: create table testtable like srcpart
+query: insert overwrite table testtable select * from srcpart
+Output: default/testtable
+query: alter table testtable truncate partition(p0)
+query: select * from testtable partition(p0) x
+Output: file:/data/allison/tdw/build/ql/tmp/465732382/10000
+query: drop table testtable

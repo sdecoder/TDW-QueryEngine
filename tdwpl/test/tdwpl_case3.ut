@@ -1,0 +1,29 @@
+root
+tdwroot
+
+# The first two lines set the user name and the password
+color
+user
+
+# Init
+connect
+new test_case3
+
+# Upload a job
+put ./pl/hive_client0.py
+
+# disconnect
+disconnect
+
+sleep 30
+
+connect
+
+attach test_case3
+
+get
+
+# Fina
+discard
+disconnect
+quit

@@ -1,0 +1,6 @@
+query: DROP TABLE testtbl
+query: CREATE TABLE testtbl(KEY INT, VALUE STRING) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' WITH SERDEPROPERTIES("charset"="gbk")
+query: LOAD DATA LOCAL INPATH '../data/files/kv.txt' INTO TABLE testtbl
+query: SELECT COUNT(*) FROM testtbl
+Output: file:/data/taojiang/qe_expansion/build/ql/tmp/1857714354/10000
+3

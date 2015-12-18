@@ -1,0 +1,42 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>console</headerType>
+  <jar>D:\project\plsql.jar</jar>
+  <outfile>D:\project\o2t.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>true</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>C:\Documents and Settings\canma\My Documents\My Pictures\Python_Icon_by_kaelan.ico</icon>
+  <jre>
+    <path>C:\Program Files\Java\jre6</path>
+    <minVersion>1.5.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <opt>-Xms64m -Xmx512m</opt>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.0.RC1</txtFileVersion>
+    <fileDescription>Transform Oracle PL/SQL code to TDW Python/SQL</fileDescription>
+    <copyright>Copyright 2010 (c) Ma Can &lt;ml.macana@gmail.com&gt;; roachxiang &lt;roachxiang@tencent.com&gt;</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.0.0</txtProductVersion>
+    <productName>Oracle PL/SQL Transformer</productName>
+    <companyName></companyName>
+    <internalName>O2T</internalName>
+    <originalFilename>O2T.exe</originalFilename>
+  </versionInfo>
+  <messages>
+    <startupErr>An error occurred while starting the application.</startupErr>
+    <bundledJreErr>This application was configured to use a bundled Java Runtime Environment but the runtime is missing or corrupted.</bundledJreErr>
+    <jreVersionErr>This application requires a Java Runtime Environment</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
+    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>

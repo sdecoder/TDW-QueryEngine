@@ -1,0 +1,7 @@
+query: create table tstnullinut(a string, b string)
+query: select x.* from tstnullinut x
+Input: default/tstnullinut
+Output: file:/data/allison/tdw/build/ql/tmp/20374711/10000
+query: select x.a, count(1) from tstnullinut x group by x.a
+Output: file:/data/allison/tdw/build/ql/tmp/23372009/10000
+query: drop table tstnullinut

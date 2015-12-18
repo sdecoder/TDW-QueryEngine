@@ -1,0 +1,25 @@
+root
+tdwroot
+
+# The first two lines set the user name and the password
+color
+user
+
+# Init
+connect
+new
+
+# SQL region
+show tables
+
+# Function region
+cat ./pl/hive_client0.py
+compile ./pl/hive_client0.py
+@ ./pl/hive_client0.py
+
+run ./pl/hive_client0.py
+
+# Fina
+discard
+status
+quit

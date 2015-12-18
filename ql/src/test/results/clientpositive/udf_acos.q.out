@@ -1,0 +1,16 @@
+query: SELECT acos(null)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/149353047/10000
+NULL
+query: SELECT acos(0)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/750818855/10000
+1.5707963267948966
+query: SELECT acos(-0.5), asin(0.66)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/1188687260/10000
+2.0943951023931957	0.7208187608700897
+query: SELECT acos(2)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/222346765/10000
+NaN

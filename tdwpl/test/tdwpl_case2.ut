@@ -1,0 +1,42 @@
+root
+tdwroot
+
+# The first two lines set the user name and the password
+color
+user
+
+# Init
+connect
+new
+
+# SQL region
+show tables
+
+# Function region
+put ./pl/hive_client.py
+sleep 60
+get
+
+# there is no jobid '1', the following statement should fail
+get 1
+
+# Config the job to repeat
+put ./pl/hive_client0.py
+sleep 60
+get
+config type=REPEAT;ti=60;
+sleep 70
+get
+sleep 70
+get
+
+# try to attache a unexisted session
+attach unexisted_sesison defaultid
+
+# unconfig
+config type=ONESHOT;ti=0;
+
+# Fina
+discard
+status
+quit

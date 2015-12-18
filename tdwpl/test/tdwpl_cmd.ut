@@ -1,0 +1,33 @@
+root
+tdwroot
+
+# The first two lines set the user name and the password
+color
+user
+
+# Test region for 'connect'
+connect
+
+# Another connect to test
+connect
+
+# Test region for 'new'
+new
+
+# Another new to test
+new
+
+# discard
+discard
+
+# retry discard
+discard
+
+# attach
+attach macan defaultid
+
+# retry attach
+attach macan defaultid
+
+status
+quit

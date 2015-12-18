@@ -1,0 +1,64 @@
+Python version is OK.
+Entering test shell mode now ...
+Username: Password: Welcome to TDW PL Shell, for help please input ? or help
+Disable color mode.
+root
+Connect to server '172.25.38.251:10000' success.
+New Session 2397471014252014 367261407
+Execute 'show tables' replied w/ :
+pokes
+Tring to upload Job './pl/hive_client.py' ...
+getJobStatus (-1)->
+The max jobid is: 0
+Checking TDW/PL code from file './pl/TDW_PL_JOB_2397471014252014_0'
+Module : TDW_PL_JOB_2397471014252014_0, sid : 2397471014252014, dbname default_db
+Audit: ok
+Require Session: 2397471014252014 ok
+Session 2397471014252014 0
+Q: 'show tables' |=> 'pokes'
+select count(1) from pokes 500
+Query 1 is done.
+Q: 'select count(1) from pokes' |=> '500'
+Query 2 is done.
+All query are done, test raise a exception.
+Traceback (most recent call last):
+  File "/data/canma/install/hive/pl/tdw_loader.py", line 109, in ?
+    main(sys.argv[1:])
+  File "/data/canma/install/hive/pl/tdw_loader.py", line 94, in main
+    module.TDW_PL(tdw.TDW(client))
+  File "/data/canma/install/hive/pl/TDW_PL_JOB_2397471014252014_0.py", line 23, in TDW_PL
+    tdw.tdw_raise()
+  File "/data/canma/install/hive/pl/tdw.py", line 103, in tdw_raise
+    raise IOError(errno, strerror)
+IOError: [Errno -1] TDW/PL default exception.
+getJobStatus (1)->
+The max jobid is: 0
+The job 1 does not exist.
+Tring to upload Job './pl/hive_client0.py' ...
+getJobStatus (-1)->
+The max jobid is: 1
+Checking TDW/PL code from file './pl/TDW_PL_JOB_2397471014252014_1'
+Module : TDW_PL_JOB_2397471014252014_1, sid : 2397471014252014, dbname default_db
+Audit: ok
+Require Session: 2397471014252014 ok
+Session 2397471014252014 1
+Q: 'show tables' |=> 'pokes'
+select count(1) from pokes :  500
+Good SQL executeion!
+Detach Session: 2397471014252014 ok
+configJob ok
+getJobStatus (-1)->
+The max jobid is: 2
+The job is in state RUNNING
+getJobStatus (-1)->
+The max jobid is: 3
+The job is in state RUNNING
+Your have attached to a session.
+Use 'status' to get the client state.
+configJob ok
+Drop Session 2397471014252014 ok
+User: 'root'
+Database name 'default_db'
+Connected to server '172.25.38.251:10000'
+Not attached to any session.
+We have disconnected from the server '172.25.38.251'

@@ -1,0 +1,16 @@
+query: SELECT asin(null)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/2106643776/10000
+NULL
+query: SELECT asin(0)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/934791707/10000
+0.0
+query: SELECT asin(-0.5), asin(0.66)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/1854903142/10000
+-0.5235987755982989	0.7208187608700897
+query: SELECT asin(2)
+FROM src LIMIT 1
+Output: file:/data/allison/tdw/build/ql/tmp/1953522562/10000
+NaN
